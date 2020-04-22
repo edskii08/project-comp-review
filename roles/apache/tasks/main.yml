@@ -6,10 +6,15 @@
     name: "{{ apache_packages }}"
     state: present
 
+- name: Ensure that policycoreutils-python is installed
+  yum:
+    name: policycoreutils-python
+    state: present
+
 - name: Ensure SELinux is set to allow httpd connections to a remote database
   seboolean:
     name: httpd_can_network_connect_db
-    state: true
+    state: yes
     persistent: yes
 
 - name: Ensure HTTPD service is started and enabled
